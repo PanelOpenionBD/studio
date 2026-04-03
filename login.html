@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login</title>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <style>
 body{display:flex;justify-content:center;align-items:center;height:100vh;background:#0f172a;color:white;font-family:Arial}
 .box{background:#1e293b;padding:30px;border-radius:10px;width:300px}
@@ -16,12 +17,22 @@ button{background:#22c55e;color:white}
 <h2>Login</h2>
 <input id="username" placeholder="Username">
 <input id="password" type="password" placeholder="Password">
+
+<!-- RECAPTCHA -->
+<div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY"></div>
+
 <button onclick="login()">Login</button>
 <p><a href="signup.html">Create Account</a></p>
 </div>
 
 <script>
 function login(){
+let captcha = grecaptcha.getResponse();
+if(captcha.length === 0){
+alert('Please complete reCAPTCHA');
+return;
+}
+
 let u=document.getElementById('username').value;
 let p=document.getElementById('password').value;
 
